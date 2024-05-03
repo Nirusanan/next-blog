@@ -1,27 +1,17 @@
-import React from 'react'
+import Post from '@/components/Post';
 
-async function getData({ params }) {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/post/${params.id}`)
+export async function generateMetadata({ params }) {
+    const id = params.id;
 
-    const json = await response.json()
+    const post = await fetch(process.env.NEXT_PUBLIC_API_URL + `/post/${params.id}`)
+    .then((res) => res.json())
 
-    return json
+    return {
+        title: post.title
+    }
 }
 
+
 export default async function page({ params }) {
-    const post = await getData({ params });
-    console.log(post);
-    return (
-        <>
-            {post && <main className="container mx-auto px-4 py-6">
-                <h2 className="text-center text-4xl font-bold mb-4">{post.title}</h2>
-                <div className="flex justify-center items-center">
-                    <img src={post.image} alt="Post Image" className="object-fit w-100 h-60 my-4" />
-                </div>
-                <p className="mx-4">{post.description}</p>
-                <p className="text-right text-gray-500">{post.created_at_formatted}</p>
-            </main>
-            }
-        </>
-    )
+    return <Post params={params}/>
 }
