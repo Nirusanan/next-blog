@@ -50,10 +50,19 @@ export default function Contact() {
           <button type='submit' className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Submit</button>
         </form>
   
-        {message && <div className="bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mx-5" role="alert">
+        {message && message !== 'Info has been sent' && <div className="bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mx-5" role="alert">
           <div className="flex">
             <div>
               <p className="font-bold">Alert!</p>
+              <p className="text-sm">{message}</p>
+            </div>
+          </div>
+        </div>}
+
+        {message && message == 'Info has been sent' && <div className="bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 mx-5" role="alert">
+          <div className="flex">
+            <div>
+              <p className="font-bold">Success</p>
               <p className="text-sm">{message}</p>
             </div>
           </div>
