@@ -1,16 +1,13 @@
+'use client'
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SessionProvider } from 'next-auth/react';
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Blog | Home",
-  description: "Create next app for Blog",
-};
 
 export default function RootLayout({
   children,
@@ -20,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <SessionProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </SessionProvider>
       </body>
     </html>
   );
