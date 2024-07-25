@@ -31,7 +31,8 @@ export default function Contact() {
     }
   
     return (
-      <main className="container mx-auto px-4 py-6">
+      <main className="min-h-screen bg-cover bg-center md:bg-contain lg:bg-cover" style={{ backgroundImage: "url('/img/contact.jpg')" }}>
+        <div className="container mx-auto px-6 py-6" >
         {message && message !== 'Info has been sent' && (
           <div className="bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mt-5 mx-auto w-full max-w-lg" role="alert">
             <div className="flex">
@@ -70,7 +71,7 @@ export default function Contact() {
           <button type='submit' className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full transition duration-300 ease-in-out">Submit</button>
         </form>
   
-        
+        </div>
       </main>
     )
 }
