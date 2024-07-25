@@ -1,17 +1,16 @@
 import Post from '@/components/Post';
 
-export async function generateMetadata({ params }) {
-    const id = params.id;
-
-    const post = await fetch(process.env.NEXT_PUBLIC_API_URL + `/post/${params.id}`)
-    .then((res) => res.json())
-
-    return {
-        title: post.title
+async function getData(id) {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${id}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch data');
     }
+    const json = await response.json();
+    return json;
 }
 
 
 export default async function page({ params }) {
-    return <Post params={params}/>
+    const post = await getData(params.id);
+    return <Post post={post}/>
 }
