@@ -1,28 +1,53 @@
-import { Schema, model, models } from "mongoose";
+import mongoose from 'mongoose';
 
-const postSchema = new Schema({
-    title: String,
-    description: String,
-    image: String,
-    created_at: String
+const PostSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  filePath: {
+    type: String,
+    required: true,
+  },
+  likes: {
+    type: Number,
+    default: 0,
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment',
+  }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 }, { toJSON: {virtuals: true} });
 
-postSchema.virtual('short_description').get(function() {
-    return this.description.substr(0,100)+'....'
+PostSchema.virtual('short_description').get(function() {
+  return this.description.substr(0,100)+'....'
 });
-postSchema.virtual('created_at_formatted').get(function() {
-    return dateFormat(this.created_at)
+PostSchema.virtual('created_at_formatted').get(function() {
+  return dateFormat(this.createdAt)
 
 });
 
-function dateFormat(date_str){
-    const date = new Date(date_str)
-    const months = ["Jan", "Feb", "Mar", "April", "May","June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+
+function dateFormat(createdAt){
+  const months = ["Jan", "Feb", "Mar", "April", "May","June", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${months[createdAt.getMonth()]} ${createdAt.getDate()}, ${createdAt.getFullYear()}`
 }
 
-// Here, the Post is singular and it is created the Posts collection in the database
-const PostModel = models.Post || model('Post', postSchema);
 
+
+const PostModel = mongoose.models.Post || mongoose.model('Post', PostSchema);
 export default PostModel;
 
