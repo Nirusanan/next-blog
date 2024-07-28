@@ -1,6 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 const PAGE_SIZE = 3; // Number of items per page
 
@@ -26,7 +28,7 @@ function Pagination({ data }) {
                 {currentPageData.map((item, index) => (
                     <Link href={"/post/" + item._id}>
                         <div className="border border-gray-200 p-4">
-                            <img className="object-fill w-full h-48 hover:object-scale-down mb-4" src={item.image} alt="Post Image" />
+                            <Image src={`/uploads/${item.filePath}`} alt="DPO" width={240} height={240} className="w-full mb-4"/>
                             <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
                             <p className="text-gray-600">{item.short_description}</p>
                         </div>
