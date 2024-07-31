@@ -27,7 +27,7 @@ export default function Navbar() {
                     </Link>
                     {session ? (
                         <>
-                            <Link href="/userPost/create" className="text-blue-800 font-bold hover:text-blue-500 transition duration-300">
+                            <Link href="/userPost/view" className="text-blue-800 font-bold hover:text-blue-500 transition duration-300">
                                 Post
                             </Link>
                             <button onClick={() => signOut()} className="text-blue-800 font-bold hover:text-blue-500 transition duration-300">
