@@ -138,7 +138,7 @@ export default function page({ post }) {
                             <div className="my-6 text-lg text-gray-700 leading-relaxed">
                                 {formattedDescription}
                             </div>
-                            <p className="text-right text-gray-500">Auther: {post.userId.name}</p>
+                            <p className="text-right text-gray-500">Author: {post.userId.name}</p>
                             <p className="text-right text-gray-500">{post.created_at_formatted}</p>
                             <div className="mt-8 flex items-center">
                                 <button
