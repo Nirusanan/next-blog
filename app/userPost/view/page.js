@@ -3,32 +3,40 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
 const AuthorPosts = () => {
   const [posts, setPosts] = useState([]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
-  const { data: session } = useSession();
-  const userId = session.user.id;
-  
+
   useEffect(() => {
-    
-    async function getData(userId) {
-      try {
+    if (status === 'loading') return;
+
+    if (status === 'authenticated' && session) {
+      const userId = session.user.id;
+      async function getData(userId) {
+        try {
           const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/userPost/${userId}`);
           if (!response.ok) {
-              throw new Error('Failed to fetch comments');
+            throw new Error('Failed to fetch posts');
           }
           const result = await response.json();
           setPosts(result);
           console.log(result);
-      } catch (error) {
+        } catch (error) {
           console.error(error.message);
+        }
       }
+      getData(userId);
+    } else if (status === 'unauthenticated') {
+      router.push('/login');
     }
-    getData(userId);
-  }, []);
-
+  }, [session, status, router]);
+  
+ 
   return (
     <div className="container mx-auto px-4 py-6 bg-blue-100 min-h-screen">
       <div className="flex justify-end mb-6">
