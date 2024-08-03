@@ -1,7 +1,9 @@
+export const revalidate = 0;
 import Post from '@/components/Post';
 
+
 async function getData(id) {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${id}?_=${Date.now()}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${id}`);
     if (!response.ok) {
         throw new Error('Failed to fetch data');
     }
