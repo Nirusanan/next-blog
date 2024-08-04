@@ -69,6 +69,7 @@ export default function CreatePost() {
   
       const data = await response.json();
       console.log('Success:', data);
+      router.push('/userPost/view');
     } catch (error) {
       console.error('Error:', error);
       setError('An error occurred while uploading the file.');

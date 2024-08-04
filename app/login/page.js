@@ -26,7 +26,7 @@ export default function Login() {
         setError("")
       }, 2000)
     } else {
-      window.location.href = '/';
+      window.location.href = '/userPost/view';
     }
   };
 
