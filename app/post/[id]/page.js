@@ -1,25 +1,3 @@
-// export const revalidate = 0;
-// import Post from '@/components/Post';
-
-
-// async function getData(id) {
-//     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${id}?_=${Date.now()}`);
-//     if (!response.ok) {
-//         throw new Error('Failed to fetch data');
-//     }
-//     const json = await response.json();
-//     console.log('Fetched data:',json);
-//     return json;
-// }
-
-
-// export default async function page({ params }) {
-//     const post = await getData(params.id);
-//     console.log(post);
-//     return <Post post={post}/>
-// }
-
-
 'use client'
 import { React, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
@@ -40,15 +18,15 @@ export default function Page({ params }) {
     const [error, setError] = useState(null);
     const { data: session } = useSession();
 
-    const fetchPostAndComments = useCallback(async () => {
+    const fetchPostAndComments = useCallback(async (postId) => {
         setIsLoading(true);
         setError(null);
         try {
-            if (!params.id) {
+            if (!postId) {
                 throw new Error('No post ID provided');
             }
-            console.log('Fetching post with ID:', params.id);
-            const postResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${params.id}?_=${Date.now()}`);
+            console.log('Fetching post with ID:', postId);
+            const postResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/post/${postId}?_=${Date.now()}`);
             if (!postResponse.ok) {
                 throw new Error(`Failed to fetch post data: ${postResponse.status}`);
             }
@@ -76,16 +54,16 @@ export default function Page({ params }) {
             setIsLoading(false);
             console.log('Loading state set to false');
         }
-    }, [params.id]);
+    }, []);
 
     useEffect(() => {
         console.log('Effect running. Params:', params);
-        fetchPostAndComments();
-    }, [fetchPostAndComments]);
+        if (params && params.id) {
+            fetchPostAndComments(params.id);
+        }
+    }, [params, fetchPostAndComments]);
 
-    useEffect(() => {
-        console.log('Current postData state:', postData);
-    }, [postData]);
+   
 
     const handleLike = async () => {
         if (!postData.post) return;
@@ -220,7 +198,7 @@ export default function Page({ params }) {
                                         Please log in to view and add comments!
                                     </p>
                                     <p className="text-sm text-gray-600 mt-1">
-                                        Once you're logged in, you can join the discussion and share your thoughts.
+                                        Once you&apos;re logged in, you can join the discussion and share your thoughts.
                                     </p>
                                 </div>
                             </div>

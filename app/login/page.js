@@ -48,11 +48,12 @@ export default function Login() {
       <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl overflow-hidden">
         <div className="md:flex">
           <div className="hidden md:block w-1/2 p-8">
-            <h2 className="text-3xl font-bold text-blue mb-4">Hey there !</h2>
+            <h2 className="text-3xl font-bold text-blue mb-4">Hey there!</h2>
             <h2 className="text-3xl font-bold text-blue mb-4">Welcome to Login</h2>
             <Image src="/img/login.jpg" alt="Illustration" width={380} height={380} className="w-full" />
             <div className="mt-6 text-center text-blue">
-              Don't have an account? <Link href="/register" legacyBehavior><a className="text-blue-500 hover:underline">Sign up here</a></Link>
+            Don&apos;t have an account?
+            <Link href="/register" legacyBehavior><a className="text-blue-500 hover:underline">Sign up here</a></Link>
             </div>
           </div>
           <div className="border-l border-gray-300"></div>
@@ -107,48 +108,6 @@ export default function Login() {
         </div>
       </div>
     </div>
-    // <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    //   {error  && (
-    //     <div className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mt-5 w-full max-w-lg" role="alert">
-    //       <div className="flex">
-    //         <div>
-    //           <p className="font-bold">Alert!</p>
-    //           <p className="text-sm">{error}</p>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    //   <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-    //     <h1 className="text-2xl font-bold mb-6">Login</h1>
-    //     <form onSubmit={handleSubmit}>
-    //       <div className="mb-4">
-    //         <label className="block text-gray-700">Email</label>
-    //         <input
-    //           type="email"
-    //           value={email}
-    //           onChange={(e) => setEmail(e.target.value)}
-    //           className="mt-1 p-2 border rounded w-full"
-    //           placeholder="Enter your email"
-    //         />
-    //       </div>
-    //       <div className="mb-4">
-    //         <label className="block text-gray-700">Password</label>
-    //         <input
-    //           type="password"
-    //           value={password}
-    //           onChange={(e) => setPassword(e.target.value)}
-    //           className="mt-1 p-2 border rounded w-full"
-    //           placeholder="Enter your password"
-    //         />
-    //       </div>
-    //       {error && <p className="text-red-500">{error}</p>}
-    //       <button className="bg-blue-500 text-white p-2 rounded w-full hover:bg-blue-700">Login</button>
-    //     </form>
-    //     <p className="mt-4">
-    //       Don't have an account?{' '}
-    //       <Link href="/register" className="text-blue-500 hover:underline">Register</Link>
-    //     </p>
-    //   </div>
-    // </div>
+    
   );
 }

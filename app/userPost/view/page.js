@@ -135,7 +135,7 @@ const AuthorPosts = () => {
             transition={{ duration: 0.5 }}
             className="text-center text-gray-500 mt-16"
           >
-            <p className="text-2xl font-light">You haven't posted anything yet.</p>
+            <p className="text-2xl font-light">You haven&apos;t posted anything yet.</p>
             <p className="mt-2">Create your first post to get started!</p>
           </motion.div>
         )}

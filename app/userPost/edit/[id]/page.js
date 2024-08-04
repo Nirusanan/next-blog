@@ -19,24 +19,26 @@ export default function EditPost({ params }) {
     if (status === 'unauthenticated') {
       router.push('/login');
     } else if (status === 'authenticated') {
+      const fetchPost = async () => {
+        try {
+          const response = await fetch(`/api/post/${params.id}`);
+          if (!response.ok) throw new Error('Failed to fetch post');
+          const post = await response.json();
+          setTitle(post.title);
+          setContent(post.description);
+          setPreviewUrl(`/uploads/${post.filePath}`);
+          setLoading(false);
+        } catch (err) {
+          setError('Failed to load post. Please try again.');
+          setLoading(false);
+        }
+      };
+
       fetchPost();
     }
-  }, [status, router]);
+  }, [status, router, params.id]);
 
-  const fetchPost = async () => {
-    try {
-      const response = await fetch(`/api/post/${params.id}`);
-      if (!response.ok) throw new Error('Failed to fetch post');
-      const post = await response.json();
-      setTitle(post.title);
-      setContent(post.description);
-      setPreviewUrl(`/uploads/${post.filePath}`);
-      setLoading(false);
-    } catch (err) {
-      setError('Failed to load post. Please try again.');
-      setLoading(false);
-    }
-  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
