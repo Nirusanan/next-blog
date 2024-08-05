@@ -1,6 +1,16 @@
 import nodemailer from 'nodemailer';
 
 export async function POST(req) {
+
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    });
+  }
   try {
     const { email, otp } = await req.json();
 
@@ -27,9 +37,15 @@ export async function POST(req) {
     };
 
     await transporter.sendMail(mailOptions);
-    return new Response(JSON.stringify({ message: 'OTP sent successfully' }), { status: 200 });
+    return new Response(JSON.stringify({ message: 'OTP sent successfully' }), { 
+      status: 200,
+      headers: { 'Access-Control-Allow-Origin': '*' }, 
+    });
   } catch (error) {
     console.error('Error sending OTP:', error);
-    return new Response(JSON.stringify({ message: 'Error sending OTP' }), { status: 500 });
+    return new Response(JSON.stringify({ message: 'Error sending OTP' }), { 
+      status: 500,
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    });
   }
 }
