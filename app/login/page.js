@@ -4,12 +4,14 @@ import React from 'react';
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
 
   const handleSubmit = async (e) => {
@@ -21,12 +23,15 @@ export default function Login() {
     });
 
     if (res?.error) {
+      console.error('Login error:', res.error);
       setError(res.error);
       setTimeout(() => {
         setError("")
       }, 2000)
     } else {
-      window.location.href = '/userPost/view';
+      console.log('Login successful');
+      router.push('/userPost/view');
+      // window.location.href = '/userPost/view';
     }
   };
 

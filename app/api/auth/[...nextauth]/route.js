@@ -24,28 +24,33 @@ const authOptions = {
         password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials) => {
-        const client = await clientPromise;
-        const db = client.db('blog_mongodb');
-        const user = await db.collection('users').findOne({ email: credentials.email });
+        try {
+          const client = await clientPromise;
+          const db = client.db('blog_mongodb');
+          const user = await db.collection('users').findOne({ email: credentials.email });
 
-        if (!user) {
-          throw new Error("Email not found");
+          if (!user) {
+            throw new Error("Email not found");
+          }
+
+          const isValidPassword = await bcrypt.compare(credentials.password, user.password);
+          if (!isValidPassword) {
+            throw new Error("Invalid password");
+          }
+
+
+          return {
+            id: user._id,
+            email: user.email,
+          };
+        } catch (error) {
+          console.error("Authorization error:", error);
+          return null;
         }
-
-        const isValidPassword = await bcrypt.compare(credentials.password, user.password);
-        if (!isValidPassword){
-          throw new Error("Invalid password");
-        }
-       
-
-        return {
-          id: user._id,
-          email: user.email,
-        };
       },
     }),
   ],
- 
+
   pages: {
     signIn: '/login',
   },
@@ -57,10 +62,14 @@ const authOptions = {
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
+      if (token){
+        session.user.id = token.id;
+      }
       return session;
     },
   },
+  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
