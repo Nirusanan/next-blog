@@ -26,7 +26,8 @@ export default function EditPost({ params }) {
           const post = await response.json();
           setTitle(post.title);
           setContent(post.description);
-          setPreviewUrl(`/uploads/${post.filePath}`);
+          // setPreviewUrl(`/uploads/${post.filePath}`);
+          setPreviewUrl(post.filePath);
           setLoading(false);
         } catch (err) {
           setError('Failed to load post. Please try again.');
