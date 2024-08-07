@@ -26,7 +26,7 @@ function Pagination({ data }) {
                     <Link href={`/post/${item._id}`} key={item._id} className="block">
                         <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105">
                             <Image
-                                src={`/uploads/${item.filePath}`}
+                                src={item.filePath}
                                 alt={item.title}
                                 width={400}
                                 height={300}

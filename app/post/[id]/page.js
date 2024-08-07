@@ -130,7 +130,7 @@ export default function Page({ params }) {
                     <div className="flex justify-center items-center">
                         <div className="w-full max-w-xl">
                             <Image 
-                                src={`/uploads/${postData.post.filePath}`} 
+                                src={postData.post.filePath}
                                 alt="Post Image" 
                                 className="object-cover w-full h-60 sm:h-80 my-4 rounded-lg" 
                                 width={400} 
