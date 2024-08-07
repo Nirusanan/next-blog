@@ -82,8 +82,8 @@ export default function EditPost({ params }) {
   if (loading) return <SkeletonLoader />;
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 bg-cover bg-center" style={{ backgroundImage: "url('/img/background.jpg')" }}>
-      <div className="max-w-2xl w-full bg-white shadow-lg rounded-lg p-8">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 bg-cover bg-center px-4 py-8 sm:px-6 md:px-8" style={{ backgroundImage: "url('/img/background.jpg')" }}>
+      <div className="max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl w-full bg-white shadow-lg rounded-lg p-8">
         {error && (
           <div className="bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mt-5 mx-auto w-full max-w-lg" role="alert">
             <div className="flex">
@@ -94,8 +94,8 @@ export default function EditPost({ params }) {
             </div>
           </div>
         )}
-        <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Edit Post</h1>
-        <form onSubmit={handleSubmit} className="space-y-1">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center text-blue-600">Edit Post</h1>
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div>
             <label htmlFor="title" className="block mb-2 text-gray-700 font-semibold">Title</label>
             <input

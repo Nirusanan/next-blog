@@ -89,9 +89,9 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100" style={{ backgroundImage: "url('/img/background.jpg')" }}>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8 sm:px-6 lg:px-8" style={{ backgroundImage: "url('/img/background.jpg')" }}>
       {message && message !== 'User has been registered' && (
-        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mt-5 w-full max-w-lg" role="alert">
+        <div className="fixed top-0 left-0 right-0 bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mt-5 mx-auto w-full max-w-lg" role="alert">
           <div className="flex">
             <div>
               <p className="font-bold">Alert!</p>
@@ -101,7 +101,7 @@ export default function Register() {
         </div>
       )}
       {message && message === 'User has been registered' && (
-        <div className="fixed top-0 left-1/2 transform -translate-x-1/2 bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 mt-5 w-full max-w-lg" role="alert">
+        <div className="fixed top-0 left-0 right-0 bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 mt-5 mx-auto w-full max-w-lg" role="alert">
           <div className="flex">
             <div>
               <p className="font-bold">Success</p>
@@ -111,12 +111,12 @@ export default function Register() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl overflow-hidden">
+      <div className="bg-white rounded-lg shadow-lg w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl overflow-hidden">
         <div className="md:flex">
-          <div className="hidden md:block w-1/2 p-8">
-            <h2 className="text-3xl font-bold text-blue mb-4">Join AI Blog</h2>
-            <h2 className="text-3xl font-bold text-blue mb-4">Get premium benefits:</h2>
-            <ul className="list-none mb-4 mb-sm-5">
+          <div className="hidden md:block md:w-1/2 p-6 lg:p-8">
+            <h2 className="text-2xl lg:text-3xl font-bold text-blue mb-4">Join AI Blog</h2>
+            <h2 className="text-2xl lg:text-3xl font-bold text-blue mb-4">Get premium benefits:</h2>
+            <ul className="list-none mb-4 mb-sm-5 text-sm lg:text-base">
               <li className="flex items-start mb-2">
                 <FontAwesomeIcon icon={faCheckCircle} className="text-blue-500 mt-1 mr-2" />
                 <span>Learn new LLMs</span>
@@ -130,53 +130,56 @@ export default function Register() {
                 <span>AI News</span>
               </li>
             </ul>
-            <Image src="/img/register1.jpg" alt="Illustration" width={450} height={450} className="w-full" />
-            <div className="mt-6 text-center text-blue">
-              Already have an account?{' '} <Link href="/login" legacyBehavior><a className="text-blue-500 hover:underline">Login</a></Link>
+            <div className="relative w-full h-48 sm:h-64 md:h-80">
+              <Image src="/img/register1.jpg" alt="Illustration" layout="fill" objectFit="contain" />
+            </div>
+            <div className="mt-4 lg:mt-6 text-center text-blue text-sm lg:text-base">
+              Already have an account?
+              <Link href="/login" className="text-blue-500 hover:underline"> Login</Link>
             </div>
           </div>
-          <div className="border-l border-gray-300"></div>
-          <div className="w-full md:w-1/2 p-8">
-            <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
-            <button className="w-full bg-white text-black border border-gray-300 rounded-lg py-2 mb-4 flex items-center justify-center hover:bg-blue-500 hover:text-white transition duration-300">
-              <Image src="/img/google.png" alt="Google" width={20} height={20} className="mr-2" />
+          <div className="hidden md:block border-l border-gray-300"></div>
+          <div className="w-full md:w-1/2 p-6 lg:p-8">
+            <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Sign Up</h1>
+            <button className="w-full bg-white text-black border border-gray-300 rounded-lg py-2 mb-3 sm:mb-4 flex items-center justify-center hover:bg-blue-500 hover:text-white transition duration-300 text-sm sm:text-base">
+              <Image src="/img/google.png" alt="Google" width={16} height={16} className="mr-2" />
               Sign up with Google
             </button>
-            <button className="w-full bg-white text-black border border-gray-300 rounded-lg py-2 mb-4 flex items-center justify-center hover:bg-blue-500 hover:text-white transition duration-300">
-              <Image src="/img/facebook.png" alt="Facebook" width={20} height={20} className="mr-2" />
+            <button className="w-full bg-white text-black border border-gray-300 rounded-lg py-2 mb-3 sm:mb-4 flex items-center justify-center hover:bg-blue-500 hover:text-white transition duration-300 text-sm sm:text-base">
+              <Image src="/img/facebook.png" alt="Facebook" width={16} height={16} className="mr-2" />
               Sign up with Facebook
             </button>
-            <div className="flex items-center my-4">
+            <div className="flex items-center my-3 sm:my-4">
               <hr className="flex-grow border-gray-300" />
-              <span className="mx-4 text-gray-400">Or</span>
+              <span className="mx-2 sm:mx-4 text-gray-400 text-sm">Or</span>
               <hr className="flex-grow border-gray-300" />
             </div>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700">Name</label>
+            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+              <div>
+                <label className="block text-gray-700 text-sm sm:text-base">Name</label>
                 <input
                   type="text"
                   name="name"
                   onChange={handleInput}
                   value={inputs.name ?? ""}
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-sm sm:text-base"
                   placeholder="Enter your name"
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Email</label>
+              <div>
+                <label className="block text-gray-700 text-sm sm:text-base">Email</label>
                 <div className="flex items-center">
                   <input
                     type="email"
                     name="email"
                     onChange={handleInput}
                     value={inputs.email ?? ""}
-                    className="mt-1 p-2 border rounded w-full"
+                    className="mt-1 p-2 border rounded w-full text-sm sm:text-base"
                     placeholder="Enter your email"
                   />
                   <button
                     type="button"
-                    className={`ml-2 px-4 py-2 rounded ${isVerifying ? 'bg-green-500' : 'bg-yellow-300'} text-white`}
+                    className={`ml-2 px-2 sm:px-4 py-2 rounded ${isVerifying ? 'bg-green-500' : 'bg-yellow-300'} text-white text-xs sm:text-sm`}
                     onClick={handleVerifyClick}
                     disabled={isVerifying}
                   >
@@ -184,38 +187,41 @@ export default function Register() {
                   </button>
                 </div>
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Password</label>
+              <div>
+                <label className="block text-gray-700 text-sm sm:text-base">Password</label>
                 <input
                   type="password"
                   name="password"
                   onChange={handleInput}
                   value={inputs.password ?? ""}
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-sm sm:text-base"
                   placeholder="Enter your password"
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Confirm Password</label>
+              <div>
+                <label className="block text-gray-700 text-sm sm:text-base">Confirm Password</label>
                 <input
                   type="password"
                   name="confirmPassword"
                   onChange={handleInput}
                   value={inputs.confirmPassword ?? ""}
-                  className="mt-1 p-2 border rounded w-full"
+                  className="mt-1 p-2 border rounded w-full text-sm sm:text-base"
                   placeholder="Confirm your password"
                 />
               </div>
-              <button className="bg-blue-500 text-white p-2 rounded w-full hover:bg-blue-700">Register</button>
+              <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition duration-300 text-sm sm:text-base">
+                Register
+              </button>
             </form>
+            <div className="mt-4 text-center text-blue text-sm md:hidden">
+              Already have an account?
+              <Link href="/login" className="text-blue-500 hover:underline"> Login</Link>
+            </div>
           </div>
         </div>
       </div>
 
-
       {isModalOpen && <OTPModal setIsModalOpen={setIsModalOpen} setIsVerifying={setIsVerifying} otp={otp} />}
-
-
     </div>
   );
 }

@@ -83,8 +83,8 @@ export default function CreatePost() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 bg-cover bg-center" style={{ backgroundImage: "url('/img/background.jpg')" }}>
-      <div className="max-w-2xl w-full bg-white shadow-lg rounded-lg p-8">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 bg-cover bg-center px-4 py-8 sm:px-6 md:px-8" style={{ backgroundImage: "url('/img/background.jpg')" }}>
+      <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white shadow-lg rounded-lg p-6 sm:p-8">
         {error && (
           <div className="bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 mt-5 mx-auto w-full max-w-lg" role="alert">
             <div className="flex">
@@ -95,38 +95,38 @@ export default function CreatePost() {
             </div>
           </div>
         )}
-        <h1 className="text-4xl font-bold mb-6 text-center text-blue-600">Create Post</h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center text-blue-600">Create Post</h1>
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Title</label>
+            <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Title</label>
             <input
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Description</label>
+            <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Description</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full h-48 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full h-32 sm:h-48 px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               required
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Image</label>
+            <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Image</label>
             <input
               type="file"
               onChange={handleFileChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none"
+              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-lg focus:outline-none"
               required
               ref={fileInputRef}
             />
           </div>
-          <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300">
+          <button type="submit" className="w-full bg-blue-500 text-white px-4 py-2 text-sm sm:text-base rounded-lg hover:bg-blue-700 transition-colors duration-300">
             Create Post
           </button>
         </form>
