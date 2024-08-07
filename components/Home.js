@@ -27,7 +27,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 mb-0">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 mb-0">
       <header className="bg-blue-600 text-white py-4 shadow-md">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold">Welcome to the Articles Hub</h1>
