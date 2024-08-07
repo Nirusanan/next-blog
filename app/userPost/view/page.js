@@ -86,7 +86,7 @@ const AuthorPosts = () => {
               >
                 <div className="relative h-48">
                   <Image
-                    src={`/uploads/${post.filePath}`}
+                    src={post.filePath}
                     alt={post.title}
                     layout="fill"
                     objectFit="cover"
