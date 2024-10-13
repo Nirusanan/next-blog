@@ -78,6 +78,35 @@ export default function EditPost({ params }) {
     }
   };
 
+  const generateLLM = async (e) => {
+    e.preventDefault();
+
+    if (title) {
+      try {
+        const res = await fetch('/api/groqLLM', {
+          method: 'POST',
+          body: JSON.stringify({ title }),
+        });
+  
+        if (!res.ok) {
+          throw new Error('Failed to fetch content');
+        }
+  
+        const data = await res.json();
+        setContent(data.content);
+        setError('');
+      } catch (err) {
+        setError(err.message);
+        setContent('');
+      }
+    }else{
+      setError('First enter the title');
+      setTimeout(() => {
+        setError("")
+      }, 2000)
+    }
+  };
+
   // if (loading) return <div className="text-center mt-8">Loading...</div>;
   if (loading) return <SkeletonLoader />;
 
@@ -117,6 +146,14 @@ export default function EditPost({ params }) {
               rows="6"
               className="w-full h-48 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             ></textarea>
+          </div>
+          <div className="flex items-center space-x-4">
+            <label htmlFor="content" className="text-gray-700 font-semibold">
+              If you like LLM content
+            </label>
+            <button onClick={generateLLM} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+              Generate LLM Content
+            </button>
           </div>
           <div>
             <label htmlFor="file" className="block mb-2 text-gray-700 font-semibold">Image</label>

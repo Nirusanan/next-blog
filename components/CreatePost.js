@@ -82,6 +82,38 @@ export default function CreatePost() {
     fileInputRef.current.value = '';
   };
 
+  const generateLLM = async (e) => {
+    e.preventDefault();
+
+    if (title) {
+      try {
+        const res = await fetch('/api/groqLLM', {
+          method: 'POST',
+          body: JSON.stringify({ title }),
+        });
+  
+        if (!res.ok) {
+          throw new Error('Failed to fetch content');
+        }
+  
+        const data = await res.json();
+        setDescription(data.content);
+        setError('');
+      } catch (err) {
+        setError(err.message);
+        setTimeout(() => {
+          setError("")
+        }, 2000);
+        setDescription('');
+      }
+    }else{
+      setError('First enter the title');
+      setTimeout(() => {
+        setError("")
+      }, 2000)
+    }
+  };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 bg-cover bg-center px-4 py-8 sm:px-6 md:px-8" style={{ backgroundImage: "url('/img/background.jpg')" }}>
       <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-white shadow-lg rounded-lg p-6 sm:p-8">
@@ -108,13 +140,21 @@ export default function CreatePost() {
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Description</label>
+            <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Content</label>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               className="w-full h-32 sm:h-48 px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               required
             />
+          </div>
+          <div className="flex items-center space-x-4">
+            <label htmlFor="content" className="text-gray-700 font-semibold">
+              If you like LLM content
+            </label>
+            <button onClick={generateLLM} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+              Generate LLM Content
+            </button>
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Image</label>
