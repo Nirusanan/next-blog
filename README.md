@@ -9,6 +9,7 @@ This project is a Blog Post Application built using Next.js 14. It features user
 - Secure access to create and view post pages, ensuring only authenticated users can access them.
 - Utilizes MongoDB for the database.
 - FontAwesome icons for UI enhancements.
+- Generate blog using Large Language Model (groq-api)
 
 
 
@@ -28,6 +29,11 @@ SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=your-email@example.com
 SMTP_PASS=your-email-password
+NEXTAUTH_SECRET= your-secret-key
+CLOUDINARY_CLOUD_NAME= cloud-name
+CLOUDINARY_API_KEY= api-key
+CLOUDINARY_API_SECRET= api-secret
+GROQ_API_KEY = groq-api-key
 ```
 
 Run the development server:
