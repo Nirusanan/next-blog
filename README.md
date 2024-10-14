@@ -9,7 +9,7 @@ This project is a Blog Post Application built using Next.js 14. It features user
 - Secure access to create and view post pages, ensuring only authenticated users can access them.
 - Utilizes MongoDB for the database.
 - FontAwesome icons for UI enhancements.
-- Generate blog using Large Language Model (groq-api)
+- Generate blog using Large Language Model
 
 
 
