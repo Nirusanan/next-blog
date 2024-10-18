@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faUserLock } from '@fortawesome/free-solid-svg-icons';
 import { useSession } from 'next-auth/react';
 import SkeletonLoader from '@/components/SkeletonLoader';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 
 export default function Page({ params }) {
@@ -139,10 +140,8 @@ export default function Page({ params }) {
                             />
                         </div>
                     </div>
-                    <div className="my-4 sm:my-6 text-base sm:text-lg text-gray-700 leading-relaxed">
-                        {postData.post.description.split('\n').map((text, index) => (
-                            <p key={index} className={`mx-2 sm:mx-4 text-justify whitespace-pre-line ${index === 0 ? 'mt-0' : 'mt-2 sm:mt-4'}`}>{text}</p>
-                        ))}
+                    <div className="my-4 sm:my-6 text-base sm:text-lg text-gray-700 leading-relaxed mx-2 sm:mx-4 text-justify">
+                        <MarkdownRenderer content={postData.post.description} />
                     </div>
                     <p className="text-right text-sm sm:text-base text-gray-500">Author: {postData.post.userId.name}</p>
                     <p className="text-right text-sm sm:text-base text-gray-500">{postData.post.created_at_formatted}</p>
