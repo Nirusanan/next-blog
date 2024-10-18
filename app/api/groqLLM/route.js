@@ -11,7 +11,7 @@ async function getGroqChatCompletion({title}) {
     messages: [
       {
         role: "user",
-        content: `write 5 paragraphs about ${title}`,
+        content: `Explain the ${title}. Avoid using phrases like 'References' or 'fantastic topic' or 'wonderful topic.'`,
       },
     ],
     model: "llama3-8b-8192",
