@@ -4,7 +4,8 @@ import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-
+import { marked } from 'marked';
+import MarkdownRenderer from '../components/MarkdownRenderer';
 
 
 export default function CreatePost() {
@@ -14,6 +15,7 @@ export default function CreatePost() {
   const [userId, setUserId] = useState('');
   const [error, setError] = useState('');
   const fileInputRef = useRef(null);
+  const [isTextareaVisible, setIsTextareaVisible] = useState(true); 
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -66,7 +68,7 @@ export default function CreatePost() {
         method: 'POST',
         body: formData,
       });
-  
+
       const data = await response.json();
       console.log('Success:', data);
       router.push('/userPost/view');
@@ -84,18 +86,20 @@ export default function CreatePost() {
 
   const generateLLM = async (e) => {
     e.preventDefault();
+   
 
     if (title) {
+      setIsTextareaVisible(false);
       try {
         const res = await fetch('/api/groqLLM', {
           method: 'POST',
           body: JSON.stringify({ title }),
         });
-  
+
         if (!res.ok) {
           throw new Error('Failed to fetch content');
         }
-  
+
         const data = await res.json();
         setDescription(data.content);
         setError('');
@@ -106,12 +110,18 @@ export default function CreatePost() {
         }, 2000);
         setDescription('');
       }
-    }else{
+    } else {
       setError('First enter the title');
       setTimeout(() => {
         setError("")
       }, 2000)
     }
+  };
+
+  const writeContent = async (e) => {
+    e.preventDefault();
+    setIsTextareaVisible(true);
+    setDescription("");
   };
 
   return (
@@ -139,23 +149,47 @@ export default function CreatePost() {
               required
             />
           </div>
+
           <div>
-            <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Content</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="w-full h-32 sm:h-48 px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-              required
-            />
+            <div className="flex items-center space-x-8  my-4">
+              <label htmlFor="content" className="text-gray-700 font-medium mb-2 text-sm sm:text-base">
+                Content
+              </label>
+              <button onClick={writeContent} className="bg-blue-500 text-white text-sm sm:text-base py-2 px-4 rounded hover:bg-blue-700">
+                Write Content
+              </button>
+              <button onClick={generateLLM} className="bg-blue-500 text-white text-sm sm:text-base py-2 px-4 rounded hover:bg-blue-700">
+                Generate LLM Content
+              </button>
+            </div>
+
+            {isTextareaVisible && (
+              <textarea
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="w-full h-32 sm:h-48 px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                required
+              />
+            )}
+
+            {!isTextareaVisible && (
+              <div
+                className="mt-4 p-4 border border-gray-300 rounded-lg overflow-auto"
+                style={{
+                  height: '200px',
+                  maxHeight: '300px',
+                  overflowY: 'scroll',
+                  overflowX: 'auto',
+                }}
+              >
+                <MarkdownRenderer content={description} />
+              </div>
+            )}
+
+            <p className="text-blue-600 font-medium mb-2 text-sm sm:text-base">Markdown and LaTeX are available</p>
+
           </div>
-          <div className="flex items-center space-x-4">
-            <label htmlFor="content" className="text-gray-700 font-semibold">
-              If you like LLM content
-            </label>
-            <button onClick={generateLLM} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-              Generate LLM Content
-            </button>
-          </div>
+
           <div>
             <label className="block text-gray-700 font-medium mb-2 text-sm sm:text-base">Image</label>
             <input
@@ -170,8 +204,8 @@ export default function CreatePost() {
             Create Post
           </button>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 
