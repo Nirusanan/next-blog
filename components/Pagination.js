@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import MarkdownRenderer from './MarkdownRenderer';
 
 const PAGE_SIZE = 6; // Number of items per page
 
@@ -34,13 +35,16 @@ function Pagination({ data }) {
                             />
                             <div className="p-4">
                                 <h2 className="text-xl font-semibold mb-2 text-gray-800">{item.title}</h2>
-                                <p className="text-gray-600 text-sm">{item.short_description}</p>
+                                {/* <p className="text-gray-600 text-sm">{item.short_description}</p> */}
+                                <p className="text-gray-800 text-sm">
+                                    <MarkdownRenderer content={item.short_description} />
+                                </p>
                             </div>
                         </div>
                     </Link>
                 ))}
             </div>
-           
+
             <div className="flex justify-center mt-8">
                 <nav className="inline-flex rounded-md shadow">
                     <button
@@ -54,11 +58,10 @@ function Pagination({ data }) {
                         <button
                             key={i}
                             onClick={() => goToPage(i + 1)}
-                            className={`px-3 py-2 border border-gray-300 text-sm font-medium ${
-                                currentPage === i + 1
-                                    ? 'bg-blue-50 text-blue-600'
-                                    : 'bg-white text-gray-500 hover:bg-gray-50'
-                            }`}
+                            className={`px-3 py-2 border border-gray-300 text-sm font-medium ${currentPage === i + 1
+                                ? 'bg-blue-50 text-blue-600'
+                                : 'bg-white text-gray-500 hover:bg-gray-50'
+                                }`}
                         >
                             {i + 1}
                         </button>
