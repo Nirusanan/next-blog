@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Trash2, Edit2, Plus, Eye } from 'lucide-react';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 const AuthorPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -96,7 +97,9 @@ const AuthorPosts = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">{post.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{post.description}</p>
+                  <p className="text-gray-600 mb-4 line-clamp-3">
+                    <MarkdownRenderer content={post.description} />
+                  </p>
                   <p className="text-sm text-gray-400 mb-4">{post.created_at_formatted}</p>
                   <div className="flex justify-end space-x-2">
                     <Link href={`/post/${post.id}`}>
